@@ -4,5 +4,9 @@
   },
   "files": [
     "index.ts"
-  ]
+  ],
+  "typedocOptions": {
+    "name": "test_npm",
+    "out": "./docs"
+  }
 }

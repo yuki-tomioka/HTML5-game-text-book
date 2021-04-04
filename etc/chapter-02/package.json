@@ -8,7 +8,5 @@
   },
   "author": "yuki-tomioka",
   "license": "MIT",
-  "dependencies": {
-    "give-me-a-joke": "^0.4.0"
-  }
+  "dependencies": {}
 }

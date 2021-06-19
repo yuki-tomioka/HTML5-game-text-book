@@ -17,7 +17,8 @@
     "scripts": {
         "tsc": "tsc -p .",
         "tslint": "tslint -p .",
-        "typedoc": "typedoc ."
+        "typedoc": "typedoc .",
+        "webpack": "webpack"
     },
     "repository": {
         "type": "git",

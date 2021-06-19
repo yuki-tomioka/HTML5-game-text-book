@@ -24,5 +24,11 @@ module.exports = (env, args) => {
         resolve: {
             extensions: ['.js', '.ts'],
         },
+
+        devServer: {
+            contentBase: 'www',
+            port: 8080
+        }
+
     }
 };

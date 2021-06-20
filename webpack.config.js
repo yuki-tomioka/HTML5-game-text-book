@@ -27,7 +27,9 @@ module.exports = (env, args) => {
 
         devServer: {
             contentBase: 'www',
-            port: 8080
+            port: 8080,
+            https: true,
+            open: true
         }
 
     }

@@ -4,7 +4,7 @@ module.exports = (env, args) => {
     return {
         mode: 'production',
         entry: {
-            index: path.join(__dirname, 'index.ts'),
+            index: path.join(__dirname, 'src', 'index.ts'),
         },
 
         output: {
@@ -23,6 +23,9 @@ module.exports = (env, args) => {
 
         resolve: {
             extensions: ['.js', '.ts'],
+            modules: [
+                "mode_modules"
+            ]
         },
 
         devServer: {

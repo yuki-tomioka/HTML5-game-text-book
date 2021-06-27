@@ -11,7 +11,7 @@ export default class Tween {
     public time: number,
     public easing: (t: number) => number,
     public change: (tween: Tween) => void | null,
-    public conmplete: (tween: Tween) => void | null,
+    public complete: (tween: Tween) => void | null,
   ) {
     this.propertyBeginValue = object[property];
   }
@@ -30,14 +30,14 @@ export default class Tween {
       }
       if (phase === 1) {
         tween.object[tween.property] = tween.target;
-        if (tween.conmplete) {
-          tween.conmplete(tween);
+        if (tween.complete) {
+          tween.complete(tween);
         }
         remove.push(tween);
       }
     }
     for (let i = 0; i < remove.length; i += 1) {
-      Tween.tweening.splice(Tween.tweening.indexOf(remove[i], 1));
+      Tween.tweening.splice(Tween.tweening.indexOf(remove[i]), 1);
     }
   }
 

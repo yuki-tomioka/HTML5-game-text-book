@@ -75,7 +75,7 @@ export default class UI extends PIXI.Container {
     const reels = this.reelContainer.children;
     for (let i = 0; i < reels.length; i += 1) {
       const reel = reels[i] as Reel;
-      if(!reel.update) {
+      if (!reel.update) {
         continue;
       }
       const extra = Math.floor(Math.random() * 3);

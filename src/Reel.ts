@@ -38,7 +38,7 @@ export default class Reel extends PIXI.Container {
   }
 
   public update(): void {
-    this.blur.blurY = (this.index - this.previousIndex) + 9;
+    this.blur.blurY = (this.index - this.previousIndex) * 8;
     this.previousIndex = this.index;
 
     for (let i = 0; i < this.children.length; i += 1) {

@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js';
 import SlotGame from './SlotGame';
 import Reel from './Reel';
+import Tween from './Tween';
 
 export default class UI extends PIXI.Container {
   public static readonly defaultTextStyle: PIXI.TextStyle = new PIXI.TextStyle({
@@ -65,5 +66,16 @@ export default class UI extends PIXI.Container {
 
   public startPlay(): void {}
 
-  public update(): void {}
+  public update(): void {
+    const reels = this.reelContainer.children;
+    for (let i = 0; i < reels.length; i += 1) {
+      const reel = reels[i] as Reel;
+      if (!reel.update) {
+        continue;
+      }
+      reel.update();
+    }
+
+    Tween.update();
+  }
 }

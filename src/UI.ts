@@ -22,6 +22,7 @@ export default class UI extends PIXI.Container {
   });
 
   private reelContainer!: PIXI.Container;
+  private reelsRunning: boolean = false;
 
   constructor() {
     super();
@@ -64,7 +65,34 @@ export default class UI extends PIXI.Container {
     coverBottom.addListener('pointerdown', () => this.startPlay());
   }
 
-  public startPlay(): void {}
+  public startPlay(): void {
+    if (this.reelsRunning) {
+      return;
+    }
+
+    this.reelsRunning = true;
+
+    const reels = this.reelContainer.children;
+    for (let i = 0; i < reels.length; i += 1) {
+      const reel = reels[i] as Reel;
+      if(!reel.update) {
+        continue;
+      }
+      const extra = Math.floor(Math.random() * 3);
+      const target = reel.index + 10 + i * 5 + extra;
+      const time = 2500 + i * 600 + extra * 600;
+      const tween = new Tween(
+        reel,
+        'index',
+        target,
+        time,
+        Tween.backout(0.5),
+        null,
+        i === reels.length - 1 ? () => { this.reelsRunning = false; } : null,
+      );
+      Tween.tweening.push(tween);
+    }
+  }
 
   public update(): void {
     const reels = this.reelContainer.children;

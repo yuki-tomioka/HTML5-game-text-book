@@ -1,21 +1,52 @@
 export default class Tween {
-  constructor(
-    object: any,
-    property: string,
-    target: number,
-    time: number,
-    easing: (t: number) => number,
-    change: (tween: Tween) => void | null,
-    conmplete: (tween: Tween) => void | null,
-  ) {}
+  public static tweening: Tween[] = [];
 
-  public static update(): void {}
+  public propertyBeginValue: any;
+  public start: number = Date.now();
+
+  constructor(
+    public object: any,
+    public property: string,
+    public target: number,
+    public time: number,
+    public easing: (t: number) => number,
+    public change: (tween: Tween) => void | null,
+    public conmplete: (tween: Tween) => void | null,
+  ) {
+    this.propertyBeginValue = object[property];
+  }
+
+  public static update(): void {
+    const now = Date.now();
+    const remove = [];
+    for (let i = 0; i < Tween.tweening.length; i += 1) {
+      const tween = Tween.tweening[i];
+      const phase = Math.min(1, (now - tween.start) / tween.time);
+
+      tween.object[tween.property] =
+        Tween.lerp(tween.propertyBeginValue, tween.target, tween.easing(phase));
+      if (tween.change) {
+        tween.change(tween);
+      }
+      if (phase === 1) {
+        tween.object[tween.property] = tween.target;
+        if (tween.conmplete) {
+          tween.conmplete(tween);
+        }
+        remove.push(tween);
+      }
+    }
+    for (let i = 0; i < remove.length; i += 1) {
+      Tween.tweening.splice(Tween.tweening.indexOf(remove[i], 1));
+    }
+  }
 
   public static backout(amount: number): (t: number) => number {
-    return (t: number) => 0;
+    // tslint:disable-next-line: no-increment-decrement no-parameter-reassignment
+    return t => (--t * t * ((amount + 1) * t + amount) + 1);
   }
 
   public static lerp(a1: number, a2: number, t: number): number {
-    return 0;
+    return a1 * (1 - t) + a2 * t;
   }
 }

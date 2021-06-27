@@ -37,5 +37,14 @@ export default class SlotGame {
     });
   }
 
-  public start(): void {}
+  public start(): void {
+    if (!this.ui) {
+      this.onReady = () => this.start();
+      return;
+    }
+    this.app.stage.addChild(this.ui);
+    this.app.ticker.add(()  => {
+      this.ui.update();
+    });
+  }
 }

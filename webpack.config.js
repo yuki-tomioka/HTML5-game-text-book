@@ -24,7 +24,7 @@ module.exports = (env, args) => {
         resolve: {
             extensions: ['.js', '.ts'],
             modules: [
-                "mode_modules"
+                "node_modules"
             ]
         },
 

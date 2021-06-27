@@ -6,7 +6,7 @@ export default class Tween {
     time: number,
     easing: (t: number) => number,
     change: (tween: Tween) => void | null,
-    conmplete: (tween: Tween) => void | null
+    conmplete: (tween: Tween) => void | null,
   ) {}
 
   public static update(): void {}

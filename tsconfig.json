@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "moduleResolution": "node"
+  },
+  "inclide": [
+    "src/**/*"
+  ],
+  "typedocOptions": {
+    "name": "test_npm",
+    "out": "./docs"
+  }
+}
